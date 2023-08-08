@@ -2,3 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* Hide content in mobile */
+@media only screen and (max-width: 480px) {
+    .mobile {
+      display: none;
+    }
+}
+
+
+/* Hide content in bigger screen */
+.desktop {
+  display: none; /* Hide the div by default */
+}
+
+@media (max-width: 480px) {
+  .desktop {
+    display: block; /* Show the div when the screen is 480px or less */
+  }
+}

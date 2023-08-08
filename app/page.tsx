@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Link from "next/link"
 
 
 export const metadata = {
@@ -8,8 +8,20 @@ export const metadata = {
 
 export default function Home() {
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24">
-			<h1 className="text-4xl font-bold text-center">WorkStaks</h1>
+		<main>
+			<div className="hero min-h-vh-minus-header bg-base-200">
+				<div className="hero-content text-center">
+					<div className="">
+						<h1 className="text-5xl font-bold">Welcome to WorkStaks!</h1>
+						<div>
+							<p className="py-6">Organize and Manage Projects with beautiful blocks</p>
+							<Link href="/home">
+								<button className="btn btn-primary">Get Started</button>
+							</Link>
+						</div>
+					</div>
+				</div>
+			</div>
 		</main>
 	)
 }

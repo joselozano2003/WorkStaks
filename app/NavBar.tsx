@@ -1,25 +1,29 @@
 import AuthCheck from "@/components/AuthCheck"
-import { SignInButton, SignOutButton } from "@/components/buttons"
+import { SignInButton, SignOutButton, MobileSignOutButton } from "@/components/buttons"
+import Link from "next/link"
 
 export default function NavBar() {
     return (
         <nav id="navbar">
-            <div className="navbar bg-neutral text-neutral-content">
+            <div className="navbar bg-neutral text-neutral-content min-h-[60px]">
 
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost btn-circle">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
                         </label>
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52 bg-neutral">
-                            <li><a>Homepage</a></li>
+                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] shadow rounded-box w-28 bg-neutral p-1 items-center">
+                            <li><Link href="/home">Homepage</Link></li>
                             <li><a>DashBoard</a></li>
+                            <AuthCheck>
+                                <li><MobileSignOutButton /></li>
+                            </AuthCheck>
                         </ul>
                     </div>
                 </div>
 
                 <div className="navbar-center">
-                    <a className="btn btn-ghost normal-case text-xl">WorkStaks</a>
+                    <Link href="/" className="btn btn-ghost normal-case text-xl">WorkStaks</Link>
                 </div>
                 <div className="navbar-end">
                     <SignInButton />
@@ -33,7 +37,6 @@ export default function NavBar() {
                             <span className="badge badge-xs badge-primary indicator-item"></span>
                         </div>
                         </button>
-                        <SignOutButton />
                     </AuthCheck>
                 </div>
             </div>
