@@ -19,9 +19,11 @@ export default function RootLayout({
 	return (
 		<AuthProvider>
 			<html lang="en">
-				<body className={inter.className}>
-					<NavBar />	
-					{children}
+				<body className="h-[100vh]">
+					<NavBar />
+					<div className='min-h-vh-minus-header'>
+						{children}	
+					</div>	
 				</body>
 			</html>
 		</AuthProvider>
