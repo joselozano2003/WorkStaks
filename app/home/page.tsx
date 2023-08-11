@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import { prisma } from "@/lib/prisma";
 
-import TeamsCard from "@/components/cards/TeamsCard";
+import TeamsCard from "@/components/cards/team/TeamsCard";
 
 export const metadata = {
     title: 'Home',
