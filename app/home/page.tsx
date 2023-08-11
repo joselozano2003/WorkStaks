@@ -6,6 +6,7 @@ import Link from "next/link";
 
 import { prisma } from "@/lib/prisma";
 
+import TeamsCard from "@/components/cards/TeamsCard";
 
 export const metadata = {
     title: 'Home',
@@ -28,17 +29,22 @@ export default async function Home() {
         },
     });
 
-    // const teams = await prisma.team.findMany({
-    //     where: {
-    //         members:{
-
-    //         }
-    //     }
-    // });
+    const teams = await prisma.team.findMany({
+        where: {
+            members:{
+                some: {
+                    id: user?.id
+                }
+            }
+        },
+        orderBy: {
+            name: 'asc'
+        }
+    });
 
     return (
         <div className="p-5">
-            <div id="header" className="flex flex-col items-center">
+            <div id="header" className="flex flex-col items-center mb-5">
                 <p className='text-center font-bold text-2xl mb-4'>Welcome {session?.user?.name}</p>
                 <p className="text-center btn btn-primary btn-sm items-center">
                     <Link href="/dashboard">Edit Profile</Link>
@@ -46,20 +52,8 @@ export default async function Home() {
             </div>
 
             <div id="content">
-                <div>
-                    <div id="teams" className="card w-60 bg-neutral shadow-xl text-neutral-content">
-                        <div className="card-body">
-                            <h2 className="card-title justify-center">My Teams</h2>
-                            <hr />
-                            <p>If a dog chews shoes whose shoes does he choose?</p>
-                            <div className="card-actions justify-center">
-                                <button className="btn btn-secondary">Join</button>
-                                <Link href="create/team">
-                                    <button className="btn btn-primary">Create</button>
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
+                <div className="flex flex-wrap justify-center">
+                    <TeamsCard teams={teams}/>
                 </div>
             </div>
         </div>

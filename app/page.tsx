@@ -1,11 +1,5 @@
 import Link from "next/link"
 
-
-export const metadata = {
-	title: 'StackWork Home',
-	description: 'Home',
-}
-
 export default function Home() {
 	return (
 		<main>
