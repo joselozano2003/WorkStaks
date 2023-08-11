@@ -29,9 +29,8 @@ export default function ProjectsCard({ projects, team }: any) {
                 </div>
 
                 <div className="card-actions justify-center">
-                    <button className="btn btn-secondary">Join</button>
                     <Link href= {`/create/project/${team.id}`} >
-                        <button className="btn btn-primary">Create</button>
+                        <button className="btn btn-secondary">Create</button>
                     </Link>
                 </div>
             </div>

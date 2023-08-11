@@ -1,13 +1,11 @@
-import CreateProjectForm from "../CreateProjectForm";
-import cover from '@/public/team2.png'
-
-import Image from "next/image";
 import { redirect } from "next/navigation";
 
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 import { prisma } from "@/lib/prisma";
+
+import CreateProjectCard from "../CreateProjectCard";
 
 
 interface Props {
@@ -22,6 +20,7 @@ export const metadata = {
 };
 
 export default async function CreateProjectPage({ params }: Props) {
+	
 
 	const session = await getServerSession(authOptions);
 
@@ -50,21 +49,9 @@ export default async function CreateProjectPage({ params }: Props) {
 	}
 
 
-	
-
-
-
-	
 	return (
-		<div>
-			<h1>Team ID: {params.id}</h1>
-			<h1>Create Project</h1>
-			<div className="card lg:card-side bg-base-100 shadow-xl">
-				<div className="card-body">
-					<CreateProjectForm />
-				</div>
-				<figure><Image src={cover} alt="Album" width={400} height={400}/></figure>
-			</div>
+		<div className="flex flex-col items-center m-0 min-h-[calc(100vh-64px)] justify-center">
+			<CreateProjectCard team={team}/>
 		</div>
 	);
 }
