@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 
 import TeamMembersCard from "@/components/cards/team/TeamMembersCard";
-import ProjectsCard from "@/components/cards/team/ProjectsCard";
+import ProjectsCard from "@/components/cards/project/ProjectsCard";
 
 interface Props {
     params: {
@@ -38,46 +38,20 @@ export default async function Team({ params }: Props) {
 
     try{
 
-        const isMember = await prisma.team.findUnique({
+        const team = await prisma.team.findUnique({
             where: { id: params.id },
-            select: {
-              members: {
-                select: {
-                  id: true
-                },
-                where: {
-                  id: user?.id
-                }
-              }
-            }
-        })
+            include: { members: true },
+        });
+          
+        const isMember = team?.members.some((member) => member.id === user?.id);
 
         if(!isMember){
-            console.log('not a member')
             redirect('/home') 
-            // TODO: redirect to custom 404 page
+            // TODO: redirect to custom 403 page
         }
-        else{
-            console.log('is a member')
-        }
+        
+        const members = team?.members
 
-        const team = await prisma.team.findUnique({
-            where: {
-                id: params.id,
-        }});
-
-        const members = await prisma.team.findUnique({
-            where: { id: params.id },
-            select: {
-                members: {
-                    select: {
-                        id: true,
-                        name: true,
-                        image: true,
-                    }
-                }
-            }
-        })
 
         const projects = await prisma.project.findMany({
             where: {
@@ -96,13 +70,9 @@ export default async function Team({ params }: Props) {
                         <div className="flex justify-around">
                             <TeamMembersCard members={members} />
                             <div className="">
-                                <ProjectsCard projects={projects} team={team?.name}/>
+                                <ProjectsCard projects={projects} team={team}/>
                             </div>
-                            
                         </div>
-
-                        <p>{JSON.stringify(team)}</p>
-                        <p>{JSON.stringify(members)}</p>
                     </div>
                 </div>
             </div>
