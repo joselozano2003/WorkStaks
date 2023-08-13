@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
         where: {
             email: currentUserEmail,
         },
-    }).then((user) => user?.id!)
+    }).then((user) => user?.id!);
 
     const data = await req.json();
 
@@ -33,7 +33,38 @@ export async function POST(req: NextRequest) {
                 },
             },
         }
-    })
+    });
 
-    return NextResponse.json(team);  
+    return NextResponse.json(team);
+}
+
+export async function PATCH(req: NextRequest) {
+    const session = await getServerSession(authOptions);
+    const currentUserEmail = session?.user?.email!;
+
+    const user = await prisma.user.findUnique({
+        where: {
+            email: currentUserEmail,
+        },
+    }).then((user) => user?.id!);
+
+    const data = await req.json();
+
+    console.log(data);
+
+    const team = await prisma.team.update({
+        where: {
+            id: data.teamId,
+        },
+        data:{
+            members: {
+                connect: {
+                    id: user,
+                },
+            },
+        }
+    });
+
+    return NextResponse.json(team);
+    
 }

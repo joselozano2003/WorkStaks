@@ -8,10 +8,11 @@ import { prisma } from "@/lib/prisma";
 
 import TeamMembersCard from "@/components/cards/team/TeamMembersCard";
 import ProjectsCard from "@/components/cards/project/ProjectsCard";
+import Link from "next/link";
 
 interface Props {
     params: {
-      id: string;
+        id: string;
     };
 }
 
@@ -40,7 +41,10 @@ export default async function Team({ params }: Props) {
 
         const team = await prisma.team.findUnique({
             where: { id: params.id },
-            include: { members: true },
+            include: { 
+                members: true,
+                owner: true,
+            },
         });
           
         const isMember = team?.members.some((member) => member.id === user?.id);
@@ -67,7 +71,12 @@ export default async function Team({ params }: Props) {
                     <div className="text-center">
                         <h1 className="font-bold text-2xl">{team?.name}</h1>
                         <h2 className="text-xl font-semibold">{team?.description}</h2>
-                        <div className="flex justify-around">
+                        {
+                            team?.owner?.id === user?.id ? (
+                                <Link href={`/edit/team/${team?.id}`} className="btn btn-primary">Manage Team</Link>
+                            ) : (<></>)
+                        }
+                        <div className="flex flex-wrap justify-around mt-3">
                             <TeamMembersCard members={members} />
                             <div className="">
                                 <ProjectsCard projects={projects} team={team}/>
@@ -82,5 +91,4 @@ export default async function Team({ params }: Props) {
         console.log(err)
         redirect('/500')
     }
-
 }

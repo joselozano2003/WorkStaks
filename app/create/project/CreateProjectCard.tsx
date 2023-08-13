@@ -48,7 +48,7 @@ export default function CreateProjectCard({ team }: Props) {
                 <figure><Image src={cover} alt="Album" width={400} height={400}/></figure>
             </div>
         </div>
-    )
-}
+    );
+};
 
 

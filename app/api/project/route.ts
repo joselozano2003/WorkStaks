@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
         where: {
             email: currentUserEmail,
         },
-    })
+    });
 
     const data = await req.json();
 
@@ -32,15 +32,15 @@ export async function POST(req: NextRequest) {
                 } 
             } 
         } 
-    })
+    });
 
     if (!isMember) {
         return NextResponse.json({ 
             message : "You are not member of this team!" 
         }, { 
             status: 403 
-        })
-    }
+        });
+    };
 
     const project = await prisma.project.create({
         data: {

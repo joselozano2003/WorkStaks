@@ -6,18 +6,30 @@
 /* Hide content in mobile */
 @media only screen and (max-width: 480px) {
     .mobile {
-      display: none;
+      	display: none;
     }
 }
 
 
 /* Hide content in bigger screen */
 .desktop {
-  display: none; /* Hide the div by default */
+  	display: none; /* Hide the div by default */
 }
 
 @media (max-width: 480px) {
-  .desktop {
-    display: block; /* Show the div when the screen is 480px or less */
-  }
+    .desktop {
+        display: block; /* Show the div when the screen is 480px or less */
+    }
+}
+
+.popup {
+	top: 0;
+	left: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
