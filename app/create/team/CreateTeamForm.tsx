@@ -20,7 +20,7 @@ export default function CreateTeamForm(props: CreateTeamFormProps) {
             description: formData.get('description'),
         }
         try{
-            const res = await fetch('/api/team', {
+            const res = await fetch('/api/teams/team', {
                 method: 'POST',
                 body: JSON.stringify(body),
                 headers: {

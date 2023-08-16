@@ -20,7 +20,7 @@ export default function ProjectsCard({ projects, team }: any) {
                                 <p>{project.description}</p>
                             </div>
                             <div className="card-actions justify-center">
-                                <Link href={`project/${project.id}`}>
+                                <Link href={`project/${project.id}`} target="_blank">
                                     <Image src={openLink} alt="Album" width={20} height={20}/>
                                 </Link>
                             </div>
@@ -29,7 +29,7 @@ export default function ProjectsCard({ projects, team }: any) {
                 </div>
 
                 <div className="card-actions justify-center">
-                    <Link href= {`/create/project/${team.id}`} >
+                    <Link href= {`/create/project/${team.id}`}>
                         <button className="btn btn-secondary">Create</button>
                     </Link>
                 </div>

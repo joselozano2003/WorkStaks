@@ -40,7 +40,7 @@ export default function CreateProjectForm(props: CreateTeamFormProps) {
             teamId: team?.id,
         }
         try{
-            const res = await fetch('/api/project', {
+            const res = await fetch('/api/projects/project', {
                 method: 'POST',
                 body: JSON.stringify(body),
                 headers: {

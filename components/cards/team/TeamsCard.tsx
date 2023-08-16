@@ -35,7 +35,7 @@ export default function TeamsCard({ teams }: any) {
 
                 <div className="flex flex-col">
                     {teams.map((team: Team) => (
-                        <div className="flex flex-row justify-around my-2" key={team.id}>
+                        <div className="flex flex-row justify-between my-2" key={team.id}>
                             <div>
                                 <h2 className=" text-black font-bold text-lg">{team.name}</h2>
                             </div>
@@ -83,7 +83,7 @@ function JoinTeamCard({ setShowJoinTeam }: JoinTeamCardProps){
         }
 
         try {
-            const res = await fetch('/api/team', {
+            const res = await fetch('/api/teams/team', {
                 method: 'PATCH',
                 body: JSON.stringify(body),
                 headers: {

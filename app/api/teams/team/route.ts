@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import { getServerSession } from "next-auth";
 import { prisma } from "@/lib/prisma";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "../../auth/[...nextauth]/route";
 
 
 export async function POST(req: NextRequest) {
@@ -66,5 +66,21 @@ export async function PATCH(req: NextRequest) {
     });
 
     return NextResponse.json(team);
-    
+}
+
+export async function GET(req: NextRequest) {
+
+    const postId = req.nextUrl.searchParams.get('id')!;
+
+    const team = await prisma.team.findUnique({
+        where: { id: postId },
+        include: { 
+            members: true,
+            owner: true,
+        },
+    });
+
+    console.log(team);
+
+    return NextResponse.json(team);
 }

@@ -4,7 +4,7 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
-import { prisma } from "@/lib/prisma";
+import { getTeams } from "@/lib/functions";
 
 import TeamsCard from "@/components/cards/team/TeamsCard";
 
@@ -21,26 +21,9 @@ export default async function Home() {
         redirect('/api/auth/signin')
     }
 
-    const currentUserEmail = session?.user?.email!;
+    const userEmail = session?.user?.email!;
+    const teams = await getTeams(userEmail);
 
-    const user = await prisma.user.findUnique({
-        where: {
-          email: currentUserEmail,
-        },
-    });
-
-    const teams = await prisma.team.findMany({
-        where: {
-            members:{
-                some: {
-                    id: user?.id
-                }
-            }
-        },
-        orderBy: {
-            name: 'asc'
-        }
-    });
 
     return (
         <div className="p-5">
