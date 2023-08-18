@@ -5,8 +5,6 @@ import Image from "next/image";
 import openLink from "@/public/links/icons8-open-link-48.png"
 
 import React, { useState } from "react";
-
-
   
 interface Team {
     id: string;

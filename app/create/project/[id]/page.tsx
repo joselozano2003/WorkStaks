@@ -7,6 +7,9 @@ import { prisma } from "@/lib/prisma";
 
 import CreateProjectCard from "../CreateProjectCard";
 
+import { getTeam, getUser } from "@/lib/functions";
+
+import type { User } from "@prisma/client";
 
 interface Props {
     params: {
@@ -30,18 +33,11 @@ export default async function CreateProjectPage({ params }: Props) {
 
     const currentUserEmail = session?.user?.email!;
 
-    const user = await prisma.user.findUnique({
-        where: {
-          email: currentUserEmail,
-        },
-    });
+    const user: User = await getUser(currentUserEmail)
 
-	const team = await prisma.team.findUnique({
-		where: { id: params.id },
-		include: { members: true },
-	});
-	  
-	const isMember = team?.members.some((member) => member.id === user?.id);
+	const team: any = await getTeam(params.id);
+		  
+	const isMember = team?.members.some((member: any) => member.id === user?.id);
 
 	if(!isMember){
 		redirect('/home') 

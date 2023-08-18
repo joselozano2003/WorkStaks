@@ -16,8 +16,6 @@ export async function POST(req: NextRequest) {
 
     const data = await req.json();
 
-    console.log(data);
-
     const team = await prisma.team.create({
         data: {
             name: data.name,
@@ -79,8 +77,6 @@ export async function GET(req: NextRequest) {
             owner: true,
         },
     });
-
-    console.log(team);
 
     return NextResponse.json(team);
 }

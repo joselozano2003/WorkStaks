@@ -11,7 +11,7 @@ import TeamMembersCard from "@/components/cards/team/TeamMembersCard";
 import ProjectsCard from "@/components/cards/project/ProjectsCard";
 import Link from "next/link";
 
-import { getUser, getTeam, getProjects, getUserSession } from "@/lib/functions";
+import { getUser, getTeam, getProjects } from "@/lib/functions";
 
 type Team = {
     id : string;
@@ -65,8 +65,8 @@ export default async function Team({ params }: Props) {
         <div className="p-5">
             <div id="content">
                 <div className="text-center">
-                    <h1 className="font-bold text-2xl">{team?.name}</h1>
-                    <h2 className="text-xl font-semibold">{team?.description}</h2>
+                    <h1 className="font-bold text-3xl text-accent-focus">{team?.name}</h1>
+                    <h2 className="text-lg font-semibold pb-3">{team?.description}</h2>
                     {
                         team?.owner?.id === user?.id ? (
                             <Link href={`/edit/team/${team?.id}`} className="btn btn-primary">Manage Team</Link>

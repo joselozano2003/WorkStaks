@@ -7,8 +7,6 @@ export async function GET(req: NextRequest){
 
     const currentUserEmail = req.nextUrl.searchParams.get('email')!;
 
-    console.log(currentUserEmail);
-
     const user = await prisma.user.findUnique({
         where: {
             email: currentUserEmail,

@@ -4,6 +4,18 @@ import { prisma } from "@/lib/prisma";
 import { authOptions } from "../../auth/[...nextauth]/route";
 
 
+export async function GET(req: NextRequest) {
+    const projectId = req.nextUrl.searchParams.get('projectId')!;
+
+    const project = await prisma.project.findUnique({
+        where: {
+            id: projectId,
+        },
+    });
+
+    return NextResponse.json(project);
+}
+
 export async function POST(req: NextRequest) {
     const session = await getServerSession(authOptions);
     const currentUserEmail = session?.user?.email!;
