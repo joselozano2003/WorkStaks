@@ -1,14 +1,28 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { prisma } from "./prisma";
+
+const URL = "http://localhost:3000"
 
 export async function getUser(email: any) {
 
-    const user = await fetch(`http://localhost:3000/api/user/?email=${email}`, {
+    const user = await fetch(`${URL}/api/user/?email=${email}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },
-        next: { revalidate: 120 }
+        next: { revalidate: 10 }
+    })
+    return user.json();
+}
+
+export async function getUserWithId(id: any) {
+    const user = await fetch(`${URL}/api/user/id/?userId=${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        next: { revalidate: 10 }
     })
     return user.json();
 }
@@ -21,12 +35,12 @@ export async function getUserSession(){
 
 export async function getTeams(userEmail: string) {
 
-    const teams = await fetch(`http://localhost:3000/api/teams/?email=${userEmail}`, {
+    const teams = await fetch(`${URL}/api/teams/?email=${userEmail}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },
-        next: { revalidate: 20 }
+        next: { revalidate: 10 }
     })
 
     return teams.json();
@@ -34,47 +48,48 @@ export async function getTeams(userEmail: string) {
 
 export async function getTeam(id: any) {
     
-    const team = await fetch(`http://localhost:3000/api/teams/team/?id=${id}`, {
+    const team = await fetch(`${URL}/api/teams/team/?id=${id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },
-        next: { revalidate: 20 }
+        next: { revalidate: 10 }
     })
 
     return team.json();
 }
 
 export async function getProjects(teamId: any) {
-    const projects = await fetch(`http://localhost:3000/api/projects/?teamId=${teamId}`, {
+    const projects = await fetch(`${URL}/api/projects/?teamId=${teamId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },
-        next: { revalidate: 20 }
+        next: { revalidate: 10 }
     })
     return projects.json();
 }
 
 export async function getProject(projectId: any) {
-    const project = await fetch(`http://localhost:3000/api/projects/project/?projectId=${projectId}`, {
+    const project = await fetch(`${URL}/api/projects/project/?projectId=${projectId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },
-        next: { revalidate: 20 }
+        next: { revalidate: 10 }
     })
     return project.json();
 }
 
 export async function getTasks(projectId: any) {
-    const tasks = await fetch(`http://localhost:3000/api/tasks/?projectId=${projectId}`, {
+    const tasks = await fetch(`${URL}/api/tasks/?projectId=${projectId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },
-        next: { revalidate: 20 }
+        next: { revalidate: 10 }
     })
     return tasks.json();
 
 }
+

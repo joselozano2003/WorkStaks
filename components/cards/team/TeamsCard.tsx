@@ -41,7 +41,7 @@ export default function TeamsCard({ teams }: any) {
                                 <p>{team.description}</p>
                             </div>
                             <div className="card-actions justify-center">
-                                <Link href={`team/${team.id}`}>
+                                <Link href={`team/${team.id}`} target="_blank">
                                     <Image src={openLink} alt="Album" width={20} height={20}/>
                                 </Link>
                             </div>

@@ -4,9 +4,10 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
-import { getTeams } from "@/lib/functions";
+import { getTeams, getUser } from "@/lib/functions";
 
 import TeamsCard from "@/components/cards/team/TeamsCard";
+import { User } from "@prisma/client";
 
 export const metadata = {
     title: 'Home',
@@ -22,6 +23,8 @@ export default async function Home() {
     }
 
     const userEmail = session?.user?.email!;
+
+    const user: User = await getUser(userEmail);
     const teams = await getTeams(userEmail);
 
 
@@ -30,7 +33,7 @@ export default async function Home() {
             <div id="header" className="flex flex-col items-center mb-5">
                 <p className='text-center font-bold text-2xl mb-4'>Welcome {session?.user?.name}</p>
                 <p className="text-center btn btn-primary btn-sm items-center">
-                    <Link href="/dashboard">Edit Profile</Link>
+                    <Link href={`/manage/user/${user?.id}`} target="_blank">Edit Profile</Link>
                 </p>
             </div>
 

@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { prisma } from "@/lib/prisma";
 import { authOptions } from "../../auth/[...nextauth]/route";
 
-
+// Create Team
 export async function POST(req: NextRequest) {
     const session = await getServerSession(authOptions);
     const currentUserEmail = session?.user?.email!;
@@ -36,6 +36,26 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(team);
 }
 
+// Edit team name and description
+export async function PUT(req: NextRequest) {
+    const data = await req.json();
+
+    console.log(data);
+
+    const team = await prisma.team.update({
+        where: {
+            id: data.teamId,
+        },
+        data: {
+            name: data.name,
+            description: data.description,
+        }
+    });
+
+    return NextResponse.json(team);
+}
+
+// Add user to team
 export async function PATCH(req: NextRequest) {
     const session = await getServerSession(authOptions);
     const currentUserEmail = session?.user?.email!;
@@ -66,6 +86,7 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json(team);
 }
 
+// Get team
 export async function GET(req: NextRequest) {
 
     const postId = req.nextUrl.searchParams.get('id')!;

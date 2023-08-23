@@ -14,7 +14,7 @@ export default function NavBar() {
                         </label>
                         <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] shadow rounded-box w-28 bg-neutral p-1 items-center">
                             <li><Link href="/home">Homepage</Link></li>
-                            <li><a>DashBoard</a></li>
+                            {/* <li><a>DashBoard</a></li> */}
                             <AuthCheck>
                                 <li><MobileSignOutButton /></li>
                             </AuthCheck>

@@ -40,7 +40,24 @@ export default async function Project({ params }: Props){
             <div className="text-center">
                 <h1 className="font-bold text-3xl text-accent-focus pb-3">{project.name}</h1>
                 <div className="flex justify-center">
-                    { tasks.length == 0 ? <EmptyCard id = {params.id}/> : <TasksCard task={tasks[0]} />}
+                    { tasks.length == 0 ? <EmptyCard id = {params.id}/> :
+
+                        <div>
+                            <Link href= {`/create/task/${params.id}`} target="_blank">
+                                <button className="btn btn-primary">Create Task</button>
+                            </Link>
+                            <div className="mt-3">
+                                {   tasks.map((task: Task) => {
+                                        return (
+                                            <TasksCard task={task} />
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div>
+
+
+                    }
                 </div>
                 
             </div>

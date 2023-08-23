@@ -69,7 +69,7 @@ export default async function Team({ params }: Props) {
                     <h2 className="text-lg font-semibold pb-3">{team?.description}</h2>
                     {
                         team?.owner?.id === user?.id ? (
-                            <Link href={`/edit/team/${team?.id}`} className="btn btn-primary">Manage Team</Link>
+                            <Link href={`/manage/team/${team?.id}`} className="btn btn-primary">Manage Team</Link>
                         ) : (<></>)
                     }
                     <div className="flex flex-wrap justify-around mt-3">
