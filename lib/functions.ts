@@ -1,7 +1,3 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { prisma } from "./prisma";
-
 const URL = "http://localhost:3000"
 
 export async function getUser(email: any) {
@@ -25,12 +21,6 @@ export async function getUserWithId(id: any) {
         next: { revalidate: 10 }
     })
     return user.json();
-}
-
-export async function getUserSession(){
-    const session = await getServerSession(authOptions);
-
-    return session;
 }
 
 export async function getTeams(userEmail: string) {
