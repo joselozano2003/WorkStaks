@@ -1,4 +1,4 @@
-const URL = "http://localhost:3000"
+const URL = "https://work-staks.vercel.app"
 
 export async function getUser(email: any) {
 
