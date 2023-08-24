@@ -1,8 +1,11 @@
 import { getUserWithId } from "@/lib/functions";
-import { Task, User } from "@prisma/client";
+import { Task, Project } from "@prisma/client";
+
+import RemoveTaskButton from "./RemoveTaskButton";
 
 interface Props {
     task: Task;
+    project: Project;
 }
 
 interface PriorityColors {
@@ -17,7 +20,7 @@ const priorityColors: PriorityColors = {
 
 
 
-export default async function TasksCard({ task }: Props) {
+export default async function TasksCard({ task, project }: Props) {
 
     const author = await getUserWithId(task.creatorId);
 
@@ -25,7 +28,7 @@ export default async function TasksCard({ task }: Props) {
 
     const priorityColor = priorityColors[priority];
     return (
-        <div className={`rounded-lg shadow-md p-5 ${priorityColor} card min-w-[15rem] m-3`}>
+        <div className={`rounded-lg shadow-md p-5 ${priorityColor} card min-w-[15rem] m-3 group`}>
             <div id="card-content" className="flex items-center justify-center flex-col">
                 <h1 className="text-2xl font-bold text-center">{task.name}</h1>
                 <div>
@@ -33,7 +36,7 @@ export default async function TasksCard({ task }: Props) {
                     <p>Created by {author?.name}</p>
                 </div>
             </div>
-
+            <RemoveTaskButton taskId={task.id} teamId={project.teamId}/>
         </div>
     )
 }

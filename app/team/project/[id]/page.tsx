@@ -1,6 +1,3 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-
 import Link from "next/link";
 
 import type { User, Project, Task } from "@prisma/client";
@@ -29,6 +26,8 @@ export default async function Project({ params }: Props){
 
     const project: Project = await getProject(params.id);
 
+    console.log(project);
+
     const tasks = await getTasks(params.id);
 
     console.log(tasks);
@@ -49,7 +48,7 @@ export default async function Project({ params }: Props){
                             <div className="mt-3">
                                 {   tasks.map((task: Task) => {
                                         return (
-                                            <TasksCard task={task} />
+                                            <TasksCard task={task} project={project}/>
                                         )
                                     })
                                 }

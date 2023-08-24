@@ -74,7 +74,7 @@ export default async function Team({ params }: Props) {
                     }
                     <div className="flex flex-wrap justify-around mt-3">
                         <TeamMembersCard members={members} />
-                        <div className="">
+                        <div className="mt-5 md:mt-0">
                             <ProjectsCard projects={projects} team={team}/>
                         </div>
                     </div>
