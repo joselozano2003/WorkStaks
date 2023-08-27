@@ -31,3 +31,16 @@ export async function DELETE(req: NextRequest) {
 
     return NextResponse.json(task)
 }
+
+export async function GET(req: NextRequest) {
+
+    const taskId = req.nextUrl.searchParams.get('taskId')!;
+
+    const task = await prisma.task.findUnique({
+        where: {
+            id: taskId
+        }
+    });
+    console.log(task)
+    return NextResponse.json(task)
+}
