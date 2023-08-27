@@ -41,6 +41,24 @@ export async function GET(req: NextRequest) {
             id: taskId
         }
     });
-    console.log(task)
+
     return NextResponse.json(task)
+}
+
+export async function PATCH(req: NextRequest) {
+    
+    const data = await req.json();
+
+    const task = await prisma.task.update({
+        where: {
+            id: data.taskId
+        },
+        data: {
+            name: data.name,
+            description: data.description,
+            importance: data.importance,
+        }
+    });
+
+    return NextResponse.json(task);
 }

@@ -1,5 +1,5 @@
 const URL = "https://work-staks.vercel.app"
-const URL2 = "https://localhost:3000"
+const DEV = "http://localhost:3000/"
 
 export async function getUser(email: any) {
 
@@ -85,10 +85,8 @@ export async function getTasks(projectId: any) {
 }
 
 export async function getTask(taskId: any) {
-
-    console.log(taskId)
-
-    const task = await fetch(`${URL2}/api/tasks/task/?taskId=${taskId}`, {
+    
+    const task = await fetch(`${URL}/api/tasks/task/?taskId=${taskId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'

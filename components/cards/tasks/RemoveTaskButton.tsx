@@ -17,5 +17,5 @@ export default function RemoveTaskButton({ taskId, teamId }: any){
 
 
     }
-    return <button className="btn btn-xs btn-error invisible group-hover:visible absolute right-1 top-1" onClick={removeTask}>Remove</button>
+    return <button className="btn btn-xs btn-error invisible group-hover:visible absolute right-1 top-1 shadow-2xl border-black" onClick={removeTask}>Remove</button>
 }

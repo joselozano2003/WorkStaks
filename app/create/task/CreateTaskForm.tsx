@@ -51,7 +51,7 @@ export default function CreateTaskForm({ errorVisible, successMessage, successVi
                 }, 5000);
             }
             else {
-                successMessage('Project created successfully!');
+                successMessage('Task created successfully!');
                 successVisible(true);
 
                 setTimeout(() => {

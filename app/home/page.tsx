@@ -10,7 +10,7 @@ import TeamsCard from "@/components/cards/team/TeamsCard";
 import { User } from "@prisma/client";
 
 export const metadata = {
-    title: 'Home',
+    title: 'WorkStaks- Home',
     description: 'Home page',
 };
 

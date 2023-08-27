@@ -26,13 +26,13 @@ export default async function Project({ params }: Props){
 
     const project: Project = await getProject(params.id);
 
-    console.log(project);
+    const tasks: Task[] = await getTasks(params.id);
 
-    const tasks = await getTasks(params.id);
+    const leastImportant = tasks.filter((task: Task) => task.importance == 1);
 
-    console.log(tasks);
-    console.log(tasks.length);
-    
+    const important = tasks.filter((task: Task) => task.importance == 2);
+
+    const mostImportant = tasks.filter((task: Task) => task.importance == 3);
 
     return (
         <div className="p-5">
@@ -45,13 +45,32 @@ export default async function Project({ params }: Props){
                             <Link href= {`/create/task/${params.id}`} target="_blank">
                                 <button className="btn btn-primary">Create Task</button>
                             </Link>
-                            <div className="mt-3">
-                                {   tasks.map((task: Task) => {
-                                        return (
-                                            <TasksCard task={task} project={project}/>
-                                        )
-                                    })
-                                }
+                            <div className="mt-3 flex flex-wrap flex-row justify-around">
+                                <div className="flex flex-col" id="leastImportant">
+                                    {  leastImportant.map((task: Task) => {
+                                            return (
+                                                <TasksCard task={task} project={project}/>
+                                            )
+                                        })
+                                    }
+                                </div>
+                                <div className="flex flex-col" id="important">
+                                    {  important.map((task: Task) => {
+                                            return (
+                                                <TasksCard task={task} project={project}/>
+                                            )
+                                        })
+                                    }
+                                </div>
+
+                                <div className="flex flex-col" id="mostImportant">
+                                    {  mostImportant.map((task: Task) => {
+                                            return (
+                                                <TasksCard task={task} project={project}/>
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
                         </div>
 

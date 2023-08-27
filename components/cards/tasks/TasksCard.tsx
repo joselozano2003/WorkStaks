@@ -2,6 +2,7 @@ import { getUserWithId } from "@/lib/functions";
 import { Task, Project } from "@prisma/client";
 
 import RemoveTaskButton from "./RemoveTaskButton";
+import Link from "next/link";
 
 interface Props {
     task: Task;
@@ -37,6 +38,9 @@ export default async function TasksCard({ task, project }: Props) {
                 </div>
             </div>
             <RemoveTaskButton taskId={task.id} teamId={project.teamId}/>
+            <Link href={`/manage/task/${task.id}`}>
+                <button className="btn btn-xs btn-primary invisible group-hover:visible absolute left-1 top-1">Edit</button>
+            </Link>
         </div>
     )
 }
