@@ -21,7 +21,7 @@ interface Props {
 export default function ManageTeamUsersCard({ user, team, errorVisible, successMessage, successVisible }: Props) {
 
     const deleteUser = async () => {
-        const res = await fetch(`${URL}/api/teams/team/user/?teamId=${team.id}&userId=${user.id}`, {
+        const res = await fetch(`/api/teams/team/user/?teamId=${team.id}&userId=${user.id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'

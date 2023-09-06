@@ -17,7 +17,7 @@ export default function TeamListItem({ user, team, errorVisible, successMessage,
 
     const leaveTeam = async () => {
 
-        const res = await fetch(`${URL}/api/teams/team/user/?teamId=${team.id}&userId=${user.id}`, {
+        const res = await fetch(`$/api/teams/team/user/?teamId=${team.id}&userId=${user.id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
