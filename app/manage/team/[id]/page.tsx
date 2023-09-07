@@ -9,6 +9,8 @@ import { User } from "@prisma/client";
 import ManageTeamPage from "../ManageTeamPage";
 import { Metadata } from "next";
 
+import DeleteTeamButton from "@/components/cards/team/DeleteTeamButton";
+
 interface Props {
     params: {
         id: string;
@@ -42,6 +44,7 @@ export default async function ManageTeam({ params }: Props){
         <div className="p-5">
             <h1 className="text-2xl font-bold text-center">Manage {team.name}</h1>
             <ManageTeamPage team={team} />
+            <DeleteTeamButton team={team}/>
         </div>
 
     )

@@ -101,3 +101,16 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(team);
 }
+
+export async function DELETE(req: NextRequest) {
+
+    const teamId = req.nextUrl.searchParams.get('id')!;
+
+    const team = await prisma.team.delete({
+        where: {
+            id: teamId,
+        },
+    });
+
+    return NextResponse.json(team);
+}
